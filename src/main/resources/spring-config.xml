@@ -29,10 +29,18 @@
     </bean>
 
     <!-- service -->
-    <bean id="vacancyService" class="com.company.service.impl.VacancyServiceImplementing" />
-    <bean id="candidateService" class="com.company.service.impl.CandidateServiceImplementing" />
+    <bean id="vacancyService" class="com.company.service.impl.VacancyServiceImpl" />
+    <bean id="skillService" class="com.company.service.impl.SkillServiceImpl" />
+    <bean id="candidateService" class="com.company.service.impl.CandidateServiceImpl" />
+    <bean id="interviewService" class="com.company.service.impl.InterviewServiceImpl" />
+    <bean id="userService" class="com.company.service.impl.UserServiceImpl" />
+    <bean id="interviewFeedbackService" class="com.company.service.impl.InterviewFeedbackServiceImpl" />
 
     <!-- dao -->
-    <bean id="vacancyDao" class="com.company.dao.impl.VacancyDaoImplementing" />
-    <bean id="candidateDao" class="com.company.dao.impl.CandidateDaoImplementing" />
+    <bean id="skillDao" class="com.company.dao.impl.SkillDaoImpl" />
+    <bean id="interviewDao" class="com.company.dao.impl.InterviewDaoImpl" />
+    <bean id="interviewFeedbackDao" class="com.company.dao.impl.InterviewFeedbackDaoImpl" />
+    <bean id="userDao" class="com.company.dao.impl.UserDaoImpl" />
+    <bean id="vacancyDao" class="com.company.dao.impl.VacancyDaoImpl" />
+    <bean id="candidateDao" class="com.company.dao.impl.CandidateDaoImpl" />
 </beans>
