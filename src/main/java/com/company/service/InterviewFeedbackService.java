@@ -5,13 +5,14 @@ import com.company.model.InterviewFeedback;
 import java.util.List;
 
 public interface InterviewFeedbackService {
-    public InterviewFeedback getInterviewFeedback(int id);
+     InterviewFeedback getInterviewFeedback(int id);
 
-    public List<InterviewFeedback> getAllInterviewFeedbacks();
+     List<InterviewFeedback> getAllInterviewFeedbacks();
+     List<String> getFeedbackStates();
 
-    public int addInterviewFeedback(InterviewFeedback interviewFeedback);
+     int addInterviewFeedback(InterviewFeedback interviewFeedback);
 
-    public int updateInterviewFeedback(InterviewFeedback interviewFeedback);
+     int updateInterviewFeedback(InterviewFeedback interviewFeedback);
 
-    public int deleteInterviewFeedback(int id);
+     int deleteInterviewFeedback(int id);
 }

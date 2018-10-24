@@ -1,10 +1,9 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
          pageEncoding="ISO-8859-1" %>
 <html>
-<title>Spring MVC and JDBC CRUD Example</title>
+<title>Vacancy Info</title>
 <body>
-<h2>Spring MVC and JDBC CRUD Example</h2>
-Id : ${vacancy.id}
+<h2>Info about vacancy : ${vacancy.id}</h2>
 <br/> Position : ${vacancy.position}
 <br/> Salary from : ${vacancy.salary_from}
 <br/> Salary to : ${vacancy.salary_to}

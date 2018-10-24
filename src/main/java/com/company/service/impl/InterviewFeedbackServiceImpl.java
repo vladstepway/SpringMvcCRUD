@@ -18,6 +18,8 @@ public class InterviewFeedbackServiceImpl implements InterviewFeedbackService {
     public List<InterviewFeedback> getAllInterviewFeedbacks() {
         return interviewFeedbackDao.getAllInterviewFeedbacks();
     }
+    public List<String> getFeedbackStates(){return interviewFeedbackDao.getAllFeedbackStatess();}
+
 
     @Override
     public int addInterviewFeedback(InterviewFeedback user) {

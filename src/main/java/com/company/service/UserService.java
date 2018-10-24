@@ -6,14 +6,20 @@ import com.company.model.User;
 
 public interface UserService {
 
-    public User getUser(int id);
+     User getUser(int id);
 
-    public List<User> getAllUsers();
+     List<User> getAllUsers();
 
-    public int addUser(User user);
+     List<User> getSortedUsers();
+     List<User> getSortedUsersDESC();
 
-    public int updateUser(User user);
+     List<String> getDeveloperId();
+     List<String> getInterviewerId();
 
-    public int deleteUser(int id);
+     int addUser(User user);
+
+     int updateUser(User user);
+
+     int deleteUser(int id);
 
 }

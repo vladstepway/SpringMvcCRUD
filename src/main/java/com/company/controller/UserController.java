@@ -10,7 +10,6 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
 
 import javax.validation.Valid;
 
@@ -24,41 +23,41 @@ public class UserController {
     @RequestMapping(value = "/user/{id}", method = RequestMethod.GET)
     public String getUser(@PathVariable int id, ModelMap userModel) {
         userModel.addAttribute("user", userService.getUser(id));
-        return "user";
+        return "userInfo";
     }
 
-    @RequestMapping(value = "/users", method = RequestMethod.GET)
+    @RequestMapping(value = "/allUsers", method = RequestMethod.GET)
     public String getUsers(ModelMap userModel) {
-        userModel.addAttribute("users", userService.getAllUsers());
-        return "users";
+        userModel.addAttribute("user", userService.getAllUsers());
+        return "allUsers";
     }
 
     @RequestMapping(value = "/user/add", method = RequestMethod.GET)
     public String addPage(Model model) {
         model.addAttribute("user", new User());
-        return "add";
+        return "addUser";
     }
 
     @RequestMapping(value = "/user/add.do", method = RequestMethod.POST)
     public String addUser(@Valid User user, BindingResult bindingResult,
                           Model userModel) {
         if (bindingResult.hasErrors()) {
-            return "add";
+            return "addUser";
         }
         userModel.addAttribute("user", user);
-
+        userModel.addAttribute("order", "ASC");
         int resp = userService.addUser(user);
         if (resp > 0) {
             userModel.addAttribute("msg", "User with id : " + resp + " added successfully.");
             userModel.addAttribute("user", userService.getAllUsers());
-            return "users";
+            return "allUsers";
         } else {
             userModel.addAttribute("msg", "User addition failed.");
-           return "add";
+           return "addUser";
         }
     }
 
-    @RequestMapping(value = "/delete/user/{id}", method = RequestMethod.GET)
+    @RequestMapping(value = "/user/delete/{id}", method = RequestMethod.GET)
     public String deleteUser(@PathVariable("id") int id, ModelMap userModel) {
         int resp = userService.deleteUser(id);
         userModel.addAttribute("user", userService.getAllUsers());
@@ -67,21 +66,35 @@ public class UserController {
         } else {
             userModel.addAttribute("msg", "User with id : " + id + " deletion failed.");
         }
-        return "users";
+        return "allUsers";
+    }
+    @RequestMapping(value = "/users/sorting/{order}", method = RequestMethod.GET)
+    public String sortUser(@PathVariable("order") String order, ModelMap userModel) {
+        if(order.equals("ASC")) {
+            userModel.addAttribute("user", userService.getSortedUsers());
+            userModel.addAttribute("order", "DESC");
+
+        }
+        else {
+            userModel.addAttribute("user", userService.getSortedUsersDESC());
+            userModel.addAttribute("order", "ASC");
+
+        }
+        return "allUsers";
     }
 
-    @RequestMapping(value = "/update/user/{id}", method = RequestMethod.GET)
+    @RequestMapping(value = "/user/update/{id}", method = RequestMethod.GET)
     public String updatePage(@PathVariable("id") int id, ModelMap userModel) {
         userModel.addAttribute("id", id);
         userModel.addAttribute("user", userService.getUser(id));
-        return "update";
+        return "updateUser";
     }
 
-    @RequestMapping(value = "/update/user", method = RequestMethod.POST)
+    @RequestMapping(value = "/user/update", method = RequestMethod.POST)
     public String updateUser(@Valid User user, BindingResult bindingResult,
                              Model userModel) {
         if (bindingResult.hasErrors()) {
-            return "update";
+            return "updateUser";
         }
         userModel.addAttribute("user", user);
 
@@ -90,12 +103,11 @@ public class UserController {
         if (resp > 0) {
             userModel.addAttribute("msg", "User with id : " + user.getId() + " updated successfully.");
             userModel.addAttribute("user", userService.getAllUsers());
-            return "users";
+            return "allUsers";
         } else {
             userModel.addAttribute("msg", "User with id : " + user.getId() + " update failed.");
             userModel.addAttribute("user", userService.getUser(user.getId()));
-            return "update";
+            return "updateUser";
         }
     }
-
 }

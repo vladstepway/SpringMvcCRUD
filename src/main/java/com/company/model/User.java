@@ -11,7 +11,6 @@ public class User {
     private int id;
 
     @NotNull(message="FirstName cannot be empty")
-    @NotEmpty
     @Size(min=2, max=30)
     private String firstName;
 

@@ -43,7 +43,9 @@ public class VacancyDaoImpl implements VacancyDao {
     public List<Vacancy> getAllVacancy() {
         return jdbcTemplate.query(QUERY_TO_SELECT_ALL_VACANCY, new VacancyRowMapper());
     }
-
+    public List<String> getAllVacancyID(){
+        return jdbcTemplate.queryForList("select id from vacancy", String.class);
+    }
     @Transactional
     public int addVacancy(Vacancy vacancy) {
         SimpleJdbcInsert simpleJdbcInsert = new SimpleJdbcInsert(jdbcTemplate);

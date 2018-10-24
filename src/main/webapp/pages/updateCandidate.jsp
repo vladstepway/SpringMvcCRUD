@@ -1,28 +1,31 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
-         pageEncoding="ISO-8859-1" %>
-<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+         pageEncoding="ISO-8859-1"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@ taglib prefix="springForm" uri="http://www.springframework.org/tags/form" %>
+<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 <html>
-<title>Spring MVC and JDBC CRUD Example</title>
+
 <body>
-<h2>Spring MVC and JDBC CRUD Example</h2>
+
 <c:if test="${not empty msg}">
     ${msg}
 </c:if>
 <h3>Update Candidate</h3>
-<form method="POST" name="update_candidate"
-      action="<%=request.getContextPath()%>/update/candidate">
-    <input hidden="hidden" name="id" value="${id}" type="text"/> First
-    Name: <input name="name" value="${name}" type="text"/>
-    <br/> <br/>
-    Surname: <input name="sname" value="${surname}" type="text"/>
-    <br/> <br/>
-    Birthday: <input name="bday" value="${birthday}" type="text"/>
-    <br/> <br/>
-    Expected salary: <input name="exp_salary" value="${expected_salary}" type="text"/>
-    <br/> <br/>
-    Candidate state: <input name="cand_state" value="${candidate_state}" type="text"/>
-    <br/> <br/>
-    <input value="Update Candidate" type="submit"/>
+<form method="POST" name="update_user"
+      action="<%=request.getContextPath()%>/candidate/update">
+    <input hidden="hidden" name="id" value="${candidate.id}" type="text" />
+    First Name: <input name="name" value="${candidate.name}" type="text" /><br />
+    <br /> Last Name: <input name="surname" value="${candidate.surname}" type="text" /> <br />
+    <br /> Birthday: <input name="birthday"   value="${candidate.birthday}" type="text" /><br />
+    <br /> Expected salary: <input name="expected_salary"   value="${candidate.expected_salary}" type="text" /><br />
+    <br />
+    <td>Candidate State:</td>
+    <td>  <form:label path="candidate_state">candidate_state:</form:label>
+        <form:select path="candidate_state" size="1">
+            <form:options items="${candidateStateList}"/>
+        </form:select>
+   </td><br />
+    <br /> <input value="Update Candidate" type="submit" />
 </form>
 </body>
 </html>

@@ -5,10 +5,11 @@ import com.company.service.CandidateService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.annotation.*;
+
+import javax.validation.Valid;
+import java.util.List;
 
 @Controller
 @RequestMapping("/")
@@ -24,30 +25,25 @@ public class CandidateController {
         return "candidateInfo";
     }
 
-    @RequestMapping(value = "candidates", method = RequestMethod.GET)
+    @RequestMapping(value = "/allCandidates", method = RequestMethod.GET)
     public String getAllCandidates(ModelMap candidateModel) {
         candidateModel.addAttribute("candidate", candidateService.getAllCandidates());
         return "allCandidates";
     }
 
-    @RequestMapping(value = "addCandidate")
+    @RequestMapping(value = "/candidate/add")
     public String addPage() {
         return "addCandidate";
     }
 
-    @RequestMapping(value = "add/candidate", method = RequestMethod.POST)
-    public String addCandidate(@RequestParam(value = "name", required = true) String name,
-                          @RequestParam(value = "sname", required = true) String sname,
-                          @RequestParam(value = "bday", required = true) String bday,
-                          @RequestParam(value = "exp_salary", required = true) Double exp_salary,
-                          @RequestParam(value = "cand_state", required = true) String cand_state,
+    @RequestMapping(value = "/candidate/add.do", method = RequestMethod.POST)
+    public String addCandidate(@Valid Candidate candidate, BindingResult bindingResult,
                                ModelMap candidateModel) {
-        Candidate candidate = new Candidate();
-        candidate.setName(name);
-        candidate.setSurname(sname);
-        candidate.setBirthday(bday);
-        candidate.setExpected_salary(exp_salary);
-        candidate.setCandidate_state(cand_state);
+        if(bindingResult.hasErrors()){
+            return "addCandidate";
+        }
+
+        candidateModel.addAttribute("candidate", candidate);
         int resp = candidateService.addCandidate(candidate);
         if (resp > 0) {
             candidateModel.addAttribute("msg", "Candidate with id : " + resp + " added successfully.");
@@ -59,7 +55,7 @@ public class CandidateController {
         }
     }
 
-    @RequestMapping(value = "delete/candidate/{id}", method = RequestMethod.GET)
+    @RequestMapping(value = "/candidate/delete/{id}", method = RequestMethod.GET)
     public String deleteCandidate(@PathVariable("id") int id, ModelMap candidateModel) {
         int resp = candidateService.deleteCandidate(id);
         candidateModel.addAttribute("candidate", candidateService.getAllCandidates());
@@ -71,15 +67,16 @@ public class CandidateController {
         return "allCandidates";
     }
 
-    @RequestMapping(value = "update/candidate/{id}", method = RequestMethod.GET)
+    @RequestMapping(value = "/candidate/update/{id}", method = RequestMethod.GET)
     public String updatePage(@PathVariable("id") int id, ModelMap candidateModel) {
         candidateModel.addAttribute("id", id);
         candidateModel.addAttribute("candidate", candidateService.getCandidate(id));
         return "updateCandidate";
     }
 
-    @RequestMapping(value = "update/candidate", method = RequestMethod.POST)
-    public String updateUser(@RequestParam int id, @RequestParam(value = "name", required = true) String name,
+    @RequestMapping(value = "/candidate/update", method = RequestMethod.POST)
+    public String updateCandidate(@RequestParam int id,
+                             @RequestParam(value = "name", required = true) String name,
                              @RequestParam(value = "sname", required = true) String sname,
                              @RequestParam(value = "bday", required = true) String bday,
                              @RequestParam(value = "exp_salary", required = true) Double exp_salary,
@@ -91,7 +88,7 @@ public class CandidateController {
         candidate.setBirthday(bday);
         candidate.setExpected_salary(exp_salary);
         candidate.setCandidate_state(cand_state);
-        int resp = candidateService.addCandidate(candidate);
+        int resp = candidateService.updateCandidate(candidate);
         candidateModel.addAttribute("id", id);
         if (resp > 0) {
             candidateModel.addAttribute("msg", "Candidate with id : " + id + " updated successfully.");
@@ -104,6 +101,10 @@ public class CandidateController {
         }
     }
 
+    @ModelAttribute("candidateStateList")
+    public List<String> getCandidateStateList() {
+        return candidateService.getListOfStates();
+    }
 
 
 

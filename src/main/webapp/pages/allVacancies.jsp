@@ -35,9 +35,9 @@
                     <td>${vacancy.experience_years_require}</td>
                     <td>${vacancy.developer_id}</td>
 
-                    <td><a href="<%=request.getContextPath()%>/update/vacancy/${vacancy.id}">Update</a>
+                    <td><a href="<%=request.getContextPath()%>/vacancy/update/${vacancy.id}">Update</a>
                         &nbsp;
-                        <a href="<%=request.getContextPath()%>/delete/vacancy/${vacancy.id}"
+                        <a href="<%=request.getContextPath()%>/vacancy/delete/${vacancy.id}"
                                   onclick="return confirm('Do you really want to delete?')">Delete</a></td>
 
                 </tr>

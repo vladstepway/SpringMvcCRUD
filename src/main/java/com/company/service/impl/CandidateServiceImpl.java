@@ -19,6 +19,8 @@ public class CandidateServiceImpl implements CandidateService {
     public List<Candidate> getAllCandidates() {
         return candidateDao.getAllCandidates();
     }
+    public List<String> getAllCandidatesID(){ return  candidateDao.getAllCandidatesID(); }
+    public List<String> getListOfStates(){return candidateDao.getListOfStates();}
 
     @Override
     public int addCandidate(Candidate candidate) {

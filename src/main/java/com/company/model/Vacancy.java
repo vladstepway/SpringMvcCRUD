@@ -11,8 +11,7 @@ public class Vacancy {
     private Double experience_years_require;
     private int developer_id;
 
-    public Vacancy() {
-    }
+    public Vacancy() {}
 
     public Vacancy(int id, String position,
                    Double salary_from,

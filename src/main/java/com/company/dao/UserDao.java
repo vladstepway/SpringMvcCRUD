@@ -10,6 +10,12 @@ public interface UserDao {
 
     public List<User> getAllUsers();
 
+    public List<User> getSortedUsers();
+    public List<User> getSortedUsersDESC();
+
+    public List<String> getDeveloperId();
+    public List<String> getInterviewerId();
+
     public int addUser(User user);
 
     public int updateUser(User user);

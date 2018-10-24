@@ -2,15 +2,13 @@
          pageEncoding="ISO-8859-1"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <html>
-<title>Spring MVC and JDBC CRUD Example</title>
 <body>
-<h2>Spring MVC and JDBC CRUD Example</h2>
 <c:if test="${not empty msg}">
     ${msg}
 </c:if>
 <h3>Update Vacancy</h3>
 <form method="POST" name="update_vacancy"
-      action="<%=request.getContextPath()%>/update/vacancy">
+      action="<%=request.getContextPath()%>/vacancy/update">
     <input hidden="hidden" name="id" value="${id}" type="text" />
     Position: <input name="pos" value="${vacancy.position}" type="text"/>
         <br/>

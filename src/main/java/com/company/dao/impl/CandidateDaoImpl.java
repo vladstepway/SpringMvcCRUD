@@ -31,6 +31,17 @@ public class CandidateDaoImpl implements CandidateDao {
         return candidateList;
     }
     @Transactional
+    public List<String> getAllCandidatesID(){
+        List<String> id = jdbcTemplate.queryForList("select id from candidate", String.class);
+        return id;
+    }
+
+    @Transactional
+    public List<String> getListOfStates(){
+        return jdbcTemplate.queryForList("select name from candidate_state", String.class);
+    }
+
+    @Transactional
     public List<Integer> getAllCandidatesId(){
         List<Integer> idList = new ArrayList<>();
         for (int i = 0; i <getAllCandidates().size() ; i++) {

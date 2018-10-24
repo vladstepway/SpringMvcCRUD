@@ -33,9 +33,9 @@
                     <td>${candidate.expected_salary}</td>
                     <td>${candidate.candidate_state}</td>
                     <td><a
-                            href="<%=request.getContextPath()%>/update/candidate/${candidate.id}">Update</a>
+                            href="<%=request.getContextPath()%>/candidate/update/${candidate.id}">Update</a>
                         &nbsp; <a
-                                href="<%=request.getContextPath()%>/delete/candidate/${candidate.id}"
+                                href="<%=request.getContextPath()%>/candidate/delete/${candidate.id}"
                                 onclick="return confirm('Do you really want to delete?')">Delete</a></td>
                 </tr>
             </c:forEach>

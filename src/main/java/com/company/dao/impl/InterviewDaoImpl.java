@@ -30,7 +30,11 @@ public class InterviewDaoImpl implements InterviewDao {
                 new InterviewRowMapper());
         return interviews;
     }
-
+    @Transactional
+    public List<String> getAllInterviewsID() {
+        List<String> id = jdbcTemplate.queryForList("select id from interview", String.class);
+        return id;
+    }
     @Transactional
     public int addInterview(Interview interview) {
         SimpleJdbcInsert simpleJdbcInsert = new SimpleJdbcInsert(jdbcTemplate);

@@ -2,7 +2,8 @@
 <beans xmlns="http://www.springframework.org/schema/beans"
        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
        xmlns:context="http://www.springframework.org/schema/context" xmlns:tx="http://www.springframework.org/schema/tx"
-       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx.xsd">
+       xmlns:mvc="http://www.springframework.org/schema/mvc"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx.xsd http://www.springframework.org/schema/mvc http://www.springframework.org/schema/mvc/spring-mvc.xsd">
     <!-- Support annotation -->
     <context:annotation-config />
 
@@ -27,20 +28,21 @@
     <bean id="jdbcTemplate" class="org.springframework.jdbc.core.JdbcTemplate">
         <property name="dataSource" ref="dataSource"></property>
     </bean>
-
-    <!-- service -->
-    <bean id="vacancyService" class="com.company.service.impl.VacancyServiceImpl" />
-    <bean id="skillService" class="com.company.service.impl.SkillServiceImpl" />
-    <bean id="candidateService" class="com.company.service.impl.CandidateServiceImpl" />
-    <bean id="interviewService" class="com.company.service.impl.InterviewServiceImpl" />
+       <!-- service -->
     <bean id="userService" class="com.company.service.impl.UserServiceImpl" />
-    <bean id="interviewFeedbackService" class="com.company.service.impl.InterviewFeedbackServiceImpl" />
+    <bean id ="interviewService" class="com.company.service.impl.InterviewServiceImpl"/>
+    <bean id ="interviewFeedbackService" class="com.company.service.impl.InterviewFeedbackServiceImpl"/>
+    <bean id ="candidateService" class="com.company.service.impl.CandidateServiceImpl"/>
+    <bean id ="vacancyService" class="com.company.service.impl.VacancyServiceImpl"/>
+    <bean id ="skillService" class="com.company.service.impl.SkillServiceImpl"/>
+
 
     <!-- dao -->
-    <bean id="skillDao" class="com.company.dao.impl.SkillDaoImpl" />
-    <bean id="interviewDao" class="com.company.dao.impl.InterviewDaoImpl" />
-    <bean id="interviewFeedbackDao" class="com.company.dao.impl.InterviewFeedbackDaoImpl" />
     <bean id="userDao" class="com.company.dao.impl.UserDaoImpl" />
-    <bean id="vacancyDao" class="com.company.dao.impl.VacancyDaoImpl" />
+    <bean id="interviewDao" class="com.company.dao.impl.InterviewDaoImpl" />
+    <bean id="interviewFeedbackDao" class="com.company.dao.impl.InterviewFeedbackDaoIml" />
     <bean id="candidateDao" class="com.company.dao.impl.CandidateDaoImpl" />
+    <bean id="vacancyDao" class="com.company.dao.impl.VacancyDaoImpl" />
+    <bean id="skillDao" class="com.company.dao.impl.SkillDaoImpl" />
+
 </beans>

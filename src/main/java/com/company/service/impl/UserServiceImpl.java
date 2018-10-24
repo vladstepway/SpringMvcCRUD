@@ -20,6 +20,11 @@ public class UserServiceImpl implements UserService {
         return userDao.getAllUsers();
     }
 
+
+    public List<User> getSortedUsers( ){ return userDao.getSortedUsers(); }
+    public List<User> getSortedUsersDESC( ){ return userDao.getSortedUsersDESC(); }
+    public List<String> getDeveloperId(){return userDao.getDeveloperId();}
+    public List<String> getInterviewerId(){return userDao.getInterviewerId();}
     @Override
     public int addUser(User user) {
         return userDao.addUser(user);

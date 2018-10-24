@@ -10,6 +10,9 @@ public interface VacancyDao {
 
     List<Vacancy> getAllVacancy();
 
+    List<String> getAllVacancyID();
+
+
     int addVacancy(Vacancy vacancy);
 
     int updateVacancy(Vacancy vacancy);

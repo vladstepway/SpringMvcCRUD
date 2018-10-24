@@ -9,6 +9,9 @@ public interface CandidateService {
     Candidate getCandidate(int id);
 
     List<Candidate> getAllCandidates();
+    List<String> getAllCandidatesID();
+
+     List<String> getListOfStates();
 
     int addCandidate(Candidate candidate);
 

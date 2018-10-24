@@ -1,16 +1,20 @@
 package com.company.model;
 
 
+import javax.validation.constraints.NotNull;
+
 public class Candidate {
     private int id;
+    @NotNull
     private String name;
+    @NotNull
     private String surname;
+    @Date
     private String birthday;
     private Double expected_salary;
     private String candidate_state;
 
-    public Candidate() {
-    }
+    public Candidate() {}
 
     public Candidate(int id, String name, String surname, String birthday, Double expected_salary, String candidate_state) {
         this.id = id;

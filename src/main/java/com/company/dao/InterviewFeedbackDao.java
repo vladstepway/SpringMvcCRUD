@@ -8,6 +8,8 @@ public interface InterviewFeedbackDao {
     public InterviewFeedback getInterviewFeedback(int interview_id);
 
     public List<InterviewFeedback> getAllInterviewFeedbacks();
+    public List<String> getAllFeedbackStatess();
+
 
     public int addInterviewFeedback(InterviewFeedback interviewFeedback);
 

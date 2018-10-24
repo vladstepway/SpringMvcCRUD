@@ -24,25 +24,24 @@ public class SkillController {
         return "skillInfo";
     }
 
-    @RequestMapping(value = "skills", method = RequestMethod.GET)
+    @RequestMapping(value = "/allSkills", method = RequestMethod.GET)
     public String getAllSkills(ModelMap skillModel) {
         skillModel.addAttribute("skill", skillService.getAllSkills());
         return "allSkills";
     }
 
-    @RequestMapping(value = "addSkill")
+    @RequestMapping(value = "skill/add")
     public String addPage() {
         return "addSkill";
     }
 
-    @RequestMapping(value = "add/skill", method = RequestMethod.POST)
-    public String addSkill(@RequestParam(value = "name", required = true) String name,
+    @RequestMapping(value = "/skill/add.do", method = RequestMethod.POST)
+    public String addSkill(Skill skill,
                            ModelMap skillModel) {
-        Skill skill = new Skill();
-        skill.setName(name);
+        skillModel.addAttribute("skill", skill);
         int resp = skillService.addSkill(skill);
         if (resp > 0) {
-            skillModel.addAttribute("msg", "Skill: " + name + " added successfully.");
+            skillModel.addAttribute("msg", "Skill: " + skill.getName() + " added successfully.");
             skillModel.addAttribute("skill", skillService.getAllSkills());
             return "allSkills";
         } else {
@@ -51,7 +50,7 @@ public class SkillController {
         }
     }
 
-    @RequestMapping(value = "delete/skill/{name}", method = RequestMethod.GET)
+    @RequestMapping(value = "/skill/delete/{name}", method = RequestMethod.GET)
     public String deleteSkill(@PathVariable("name") String name, ModelMap skillModel) {
         int resp = skillService.deleteSkill(name);
         skillModel.addAttribute("skill", skillService.getAllSkills());
@@ -63,14 +62,14 @@ public class SkillController {
         return "allSkills";
     }
 
-    @RequestMapping(value = "update/skill/{name}", method = RequestMethod.GET)
+    @RequestMapping(value = "/skill/update/{name}", method = RequestMethod.GET)
     public String updatePage(@PathVariable("name") String name, ModelMap skillModel) {
         skillModel.addAttribute("name", name);
         skillModel.addAttribute("skill", skillService.getSkill(name));
         return "updateSkill";
     }
 
-    @RequestMapping(value = "update/skill", method = RequestMethod.POST)
+    @RequestMapping(value = "/skill/update", method = RequestMethod.POST)
     public String updateUser(@RequestParam(value = "name", required = true) String name,
                              ModelMap skillModel) {
         Skill skill = new Skill();

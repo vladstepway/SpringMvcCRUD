@@ -6,14 +6,16 @@ import java.util.List;
 
 public interface InterviewService {
 
-    public Interview getInterview(int id);
+     Interview getInterview(int id);
 
-    public List<Interview> getAllInterviews();
+     List<Interview> getAllInterviews();
+     List<String> getAllInterviewsID();
 
-    public int addInterview(Interview interview);
 
-    public int updateInterview(Interview interview);
+     int addInterview(Interview interview);
 
-    public int deleteInterview(int id);
+     int updateInterview(Interview interview);
+
+     int deleteInterview(int id);
 
 }

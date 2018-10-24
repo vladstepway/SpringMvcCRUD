@@ -1,14 +1,17 @@
 package com.company.controller;
 
 import com.company.model.Vacancy;
+import com.company.service.UserService;
 import com.company.service.VacancyService;
+import org.springframework.beans.BeanInfoFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.annotation.*;
+
+import javax.validation.Valid;
+import java.util.List;
 
 @Controller
 @RequestMapping("/")
@@ -16,6 +19,8 @@ public class VacancyController {
 
     @Autowired
     private VacancyService vacancyService;
+    @Autowired
+    private UserService userService;
 
     @RequestMapping(value = "vacancy/{id}", method = RequestMethod.GET)
     public String getVacancy(@PathVariable int id, ModelMap vacancyModel) {
@@ -23,32 +28,23 @@ public class VacancyController {
         return "vacancyInfo";
     }
 
-    @RequestMapping(value = "vacancies", method = RequestMethod.GET)
+    @RequestMapping(value = "/allVacancies", method = RequestMethod.GET)
     public String getVacancies(ModelMap vacancyModel) {
         vacancyModel.addAttribute("vacancy", vacancyService.getAllVacancies());
         return "allVacancies";
     }
 
-    @RequestMapping(value = "addVacancy")
+    @RequestMapping(value = "/vacancy/add")
     public String addPage() {
         return "addVacancy";
     }
 
-    @RequestMapping(value = "add/vacancy", method = RequestMethod.POST)
-    public String addVacancy(@RequestParam(value = "pos", required = true) String pos,
-                          @RequestParam(value = "sal_from", required = true) Double sal_from,
-                          @RequestParam(value = "sal_to", required = true) Double sal_to,
-                          @RequestParam(value = "vac_state", required = true) String vac_state,
-                          @RequestParam(value = "exp_years", required = true) Double exp_years,
-                          @RequestParam(value = "dev_id", required = true) int dev_id,
-                          ModelMap vacancyModel) {
-        Vacancy vacancy = new Vacancy();
-        vacancy.setPosition(pos);
-        vacancy.setSalary_from(sal_from);
-        vacancy.setSalary_to(sal_to);
-        vacancy.setVacancy_state(vac_state);
-        vacancy.setExperience_years_require(exp_years);
-        vacancy.setDeveloper_id(dev_id);
+    @RequestMapping(value = "/vacancy/add.do", method = RequestMethod.POST)
+    public String addVacancy(@Valid Vacancy vacancy, BindingResult bindingResult, ModelMap vacancyModel) {
+        if(bindingResult.hasErrors()){
+            return "addVacancy";
+        }
+        vacancyModel.addAttribute("vacancy", vacancy);
         int resp = vacancyService.addVacancy(vacancy);
         if (resp > 0) {
             vacancyModel.addAttribute("msg",
@@ -64,7 +60,7 @@ public class VacancyController {
         }
     }
 
-    @RequestMapping(value = "delete/vacancy/{id}", method = RequestMethod.GET)
+    @RequestMapping(value = "/vacancy/delete/{id}", method = RequestMethod.GET)
     public String deleteVacancy(@PathVariable("id") int id, ModelMap vacancyModel) {
         int resp = vacancyService.deleteVacancy(id);
         vacancyModel.addAttribute("vacancy",
@@ -79,7 +75,7 @@ public class VacancyController {
         return "allVacancies";
     }
 
-    @RequestMapping(value = "update/vacancy/{id}", method = RequestMethod.GET)
+    @RequestMapping(value = "/vacancy/update/{id}", method = RequestMethod.GET)
     public String updatePage(@PathVariable("id") int id, ModelMap vacancyModel) {
         vacancyModel.addAttribute("id", id);
         vacancyModel.addAttribute("vacancy",
@@ -87,7 +83,7 @@ public class VacancyController {
         return "updateVacancy";
     }
 
-    @RequestMapping(value = "update/vacancy", method = RequestMethod.POST)
+    @RequestMapping(value = "/vacancy/update", method = RequestMethod.POST)
     public String updateVacancy(@RequestParam int id,
                                 @RequestParam(value = "pos", required = true) String pos,
                                 @RequestParam(value = "sal_from", required = true) Double sal_from,
@@ -121,7 +117,11 @@ public class VacancyController {
                 return "updateVacancy";
             }
         }
-
-
+    }
+    @ModelAttribute("developerIDList")
+    public List<String> getUserDeveloperList() {
+        List<String> idList = userService.getDeveloperId();
+        // добавляем id только тех юзеров, кто является developer
+        return idList;
     }
 }

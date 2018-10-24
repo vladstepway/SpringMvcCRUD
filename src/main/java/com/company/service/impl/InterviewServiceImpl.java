@@ -18,6 +18,8 @@ public class InterviewServiceImpl implements InterviewService {
     public List<Interview> getAllInterviews() {
         return interviewDao.getAllInterviews();
     }
+    public List<String> getAllInterviewsID(){ return interviewDao.getAllInterviewsID(); }
+
 
     @Override
     public int addInterview(Interview user) {

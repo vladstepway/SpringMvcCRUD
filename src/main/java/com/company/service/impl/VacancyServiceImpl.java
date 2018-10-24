@@ -20,6 +20,8 @@ public class VacancyServiceImpl implements VacancyService {
     public List<Vacancy> getAllVacancies() {
         return vacancyDao.getAllVacancy();
     }
+    public List<String> getVacanciesID(){return vacancyDao.getAllVacancyID();}
+
 
     @Override
     public int addVacancy(Vacancy vacancy) {

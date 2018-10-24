@@ -9,6 +9,7 @@ public interface VacancyService {
     Vacancy getVacancy(int id);
 
     List<Vacancy> getAllVacancies();
+     List<String> getVacanciesID();
 
     int addVacancy(Vacancy vacancy);
 

@@ -30,7 +30,22 @@ public class UserDaoImpl implements UserDao {
                 new UserRowMapper());
         return user;
     }
-
+    public List<User> getSortedUsers(){
+        List<User> user = jdbcTemplate.query("select * from user order by surname",  new UserRowMapper());
+        return user;
+    }
+    public List<User> getSortedUsersDESC(){
+        List<User> user = jdbcTemplate.query("select * from user order by surname desc",  new UserRowMapper());
+        return user;
+    }
+    @Transactional
+    public List<String> getDeveloperId(){
+        return jdbcTemplate.queryForList("select id from user where user_role = 'developer'", String.class);
+    }
+    @Transactional
+    public List<String> getInterviewerId(){
+        return jdbcTemplate.queryForList("select id from user where user_role = 'interviewer'", String.class);
+    }
     @Transactional
     public int addUser(User user) {
         SimpleJdbcInsert simpleJdbcInsert = new SimpleJdbcInsert(jdbcTemplate);
