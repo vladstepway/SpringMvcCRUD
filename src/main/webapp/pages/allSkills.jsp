@@ -3,6 +3,9 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <html>
 <body>
+<form action="/skill/add" method="get">
+    <p><button>Add</button></p>
+</form>
 <c:if test="${not empty msg}">
     ${msg}
 </c:if>
