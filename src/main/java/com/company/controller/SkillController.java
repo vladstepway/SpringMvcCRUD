@@ -5,6 +5,7 @@ import com.company.model.Skill;
 import com.company.service.SkillService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -31,7 +32,8 @@ public class SkillController {
     }
 
     @RequestMapping(value = "skill/add")
-    public String addPage() {
+    public String addPage(Model model) {
+        model.addAttribute("skill",new Skill());
         return "addSkill";
     }
 
@@ -75,7 +77,7 @@ public class SkillController {
         Skill skill = new Skill();
         skill.setName(name);
         int resp = skillService.addSkill(skill);
-        skillModel.addAttribute("name",name);
+        skillModel.addAttribute("name", name);
         if (resp > 0) {
             skillModel.addAttribute("msg", "Skill  : " + name + " updated successfully.");
             skillModel.addAttribute("skill", skillService.getAllSkills());

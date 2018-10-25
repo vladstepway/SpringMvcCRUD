@@ -6,6 +6,7 @@ import com.company.service.VacancyService;
 import org.springframework.beans.BeanInfoFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.ui.ModelMap;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
@@ -14,7 +15,7 @@ import javax.validation.Valid;
 import java.util.List;
 
 @Controller
-@RequestMapping("/")
+
 public class VacancyController {
 
     @Autowired
@@ -22,7 +23,7 @@ public class VacancyController {
     @Autowired
     private UserService userService;
 
-    @RequestMapping(value = "vacancy/{id}", method = RequestMethod.GET)
+    @RequestMapping(value = "/vacancy/{id}", method = RequestMethod.GET)
     public String getVacancy(@PathVariable int id, ModelMap vacancyModel) {
         vacancyModel.addAttribute("vacancy", vacancyService.getVacancy(id));
         return "vacancyInfo";
@@ -34,8 +35,9 @@ public class VacancyController {
         return "allVacancies";
     }
 
-    @RequestMapping(value = "/vacancy/add")
-    public String addPage() {
+    @RequestMapping(value = "/vacancy/add", method = RequestMethod.GET)
+    public String addPage(Model model) {
+        model.addAttribute("vacancy",new Vacancy());
         return "addVacancy";
     }
 
