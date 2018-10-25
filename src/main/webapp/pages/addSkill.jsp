@@ -12,7 +12,7 @@
     <title>Save Page</title>
     <style>
         .error {
-            color: #ff3338;
+            color: #ff2000;
             font-style: italic;
             font-weight: bold;
         }
