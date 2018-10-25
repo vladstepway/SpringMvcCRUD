@@ -30,7 +30,10 @@
                     <td><a href="<%=request.getContextPath()%>/interviewFeedback/update/${interviewFeedback.interview_id}">Update</a>
                         &nbsp;
                         <a   href="<%=request.getContextPath()%>/interviewFeedback/delete/${interviewFeedback.interview_id}"
-                             onclick="return confirm('Do you really want to delete?')">Delete</a></td>
+                             onclick="return confirm('Do you really want to delete?')">Delete</a>
+                        &nbsp;
+                        <a href="<%=request.getContextPath()%>/interviewFeedback/${interviewFeedback.interview_id}">View</a>
+                    </td>
                 </tr>
             </c:forEach>
             </tbody>

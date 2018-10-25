@@ -40,7 +40,10 @@
                     <td><a href="<%=request.getContextPath()%>/vacancy/update/${vacancy.id}">Update</a>
                         &nbsp;
                         <a href="<%=request.getContextPath()%>/vacancy/delete/${vacancy.id}"
-                                  onclick="return confirm('Do you really want to delete?')">Delete</a></td>
+                                  onclick="return confirm('Do you really want to delete?')">Delete</a>
+                        &nbsp;
+                        <a href="<%=request.getContextPath()%>/vacancy/${vacancy.id}">View</a>
+                    </td>
 
                 </tr>
             </c:forEach>

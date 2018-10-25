@@ -1,11 +1,13 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
-         pageEncoding="ISO-8859-1"%>
-<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+         pageEncoding="ISO-8859-1" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <html>
 <title></title>
 <body>
 <form action="/user/add" method="get">
-    <p><button>Add</button></p>
+    <p>
+        <button>Add</button>
+    </p>
 </form>
 <c:if test="${not empty msg}">
     ${msg}
@@ -18,7 +20,7 @@
             <tr>
                 <th>ID</th>
                 <th>First Name</th>
-                <th> <a href="<%=request.getContextPath()%>/users/sorting/${order}">Surname</a>
+                <th><a href="<%=request.getContextPath()%>/users/sorting/${order}">Surname</a>
                 </th>
                 <th>Email</th>
                 <th>Password</th>
@@ -35,10 +37,14 @@
                     <td>${user.password}</td>
                     <td>${user.userRole}</td>
 
-                    <td><a href="<%=request.getContextPath()%>/user/update${user.id}">Update</a>
+                    <td><a href="<%=request.getContextPath()%>/user/update/${user.id}">Update</a>
                         &nbsp;
-                        <a   href="<%=request.getContextPath()%>/user/delete/${user.id}"
-                             onclick="return confirm('Do you really want to delete?')">Delete</a></td>
+                        <a href="<%=request.getContextPath()%>/user/delete/${user.id}"
+                           onclick="return confirm('Do you really want to delete?')">Delete</a>
+                        &nbsp;
+                        <a href="<%=request.getContextPath()%>/user/${user.id}">View</a>
+                    </td>
+
                 </tr>
             </c:forEach>
             </tbody>

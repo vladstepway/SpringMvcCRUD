@@ -34,7 +34,10 @@
                         <a href="<%=request.getContextPath()%>/interview/update/${interview.id}">Update</a>
                         &nbsp;
                         <a href="<%=request.getContextPath()%>/interview/delete/${interview.id}"
-                          onclick="return confirm('Do you really want to delete?')">Delete</a></td>
+                          onclick="return confirm('Do you really want to delete?')">Delete</a>
+                        &nbsp;
+                        <a href="<%=request.getContextPath()%>/interview/${interview.id}">View</a>
+                    </td>
                 </tr>
             </c:forEach>
             </tbody>

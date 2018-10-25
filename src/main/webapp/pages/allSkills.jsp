@@ -26,7 +26,10 @@
                         <a href="<%=request.getContextPath()%>/skill/update/${skill.name}">Update</a>
                         &nbsp;
                         <a href="<%=request.getContextPath()%>/skill/delete${skill.name}"
-                           onclick="return confirm('Do you really want to delete?')">Delete</a></td>
+                           onclick="return confirm('Do you really want to delete?')">Delete</a>
+                        &nbsp;
+                        <a href="<%=request.getContextPath()%>/skill/${skill.name}">View</a>
+                    </td>
                 </tr>
             </c:forEach>
             </tbody>

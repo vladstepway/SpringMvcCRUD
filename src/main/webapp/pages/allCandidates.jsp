@@ -5,7 +5,9 @@
 <title></title>
 <body>
 <form action="/candidate/add" method="get">
-    <p><button>Add</button></p>
+    <p>
+        <button>Add</button>
+    </p>
 </form>
 <c:if test="${not empty msg}">
     ${msg}
@@ -38,7 +40,10 @@
                             href="<%=request.getContextPath()%>/candidate/update/${candidate.id}">Update</a>
                         &nbsp; <a
                                 href="<%=request.getContextPath()%>/candidate/delete/${candidate.id}"
-                                onclick="return confirm('Do you really want to delete?')">Delete</a></td>
+                                onclick="return confirm('Do you really want to delete?')">Delete</a>
+                        &nbsp;
+                        <a href="<%=request.getContextPath()%>/candidate/${candidate.id}">View</a>
+                    </td>
                 </tr>
             </c:forEach>
             </tbody>
