@@ -40,7 +40,7 @@
     <!-- dao -->
     <bean id="userDao" class="com.company.dao.impl.UserDaoImpl" />
     <bean id="interviewDao" class="com.company.dao.impl.InterviewDaoImpl" />
-    <bean id="interviewFeedbackDao" class="com.company.dao.impl.InterviewFeedbackDaoIml" />
+    <bean id="interviewFeedbackDao" class="com.company.dao.impl.InterviewFeedbackDaoImpl" />
     <bean id="candidateDao" class="com.company.dao.impl.CandidateDaoImpl" />
     <bean id="vacancyDao" class="com.company.dao.impl.VacancyDaoImpl" />
     <bean id="skillDao" class="com.company.dao.impl.SkillDaoImpl" />
